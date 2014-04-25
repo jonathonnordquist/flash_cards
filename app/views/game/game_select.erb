@@ -1,0 +1,8 @@
+<div class="container">
+  <h1>Select your Deck</h1>
+  <ul>
+    <% @all_decks.each do |deck| %>
+      <li><%= deck.name %><a href = "/game/question/<%= game.id %>"></a></li>
+    <% end %>
+  </ul>
+</div>
