@@ -12,6 +12,7 @@ require 'uri'
 require 'pathname'
 
 require 'bcrypt'
+# require 'bcrypt-ruby'
 
 require 'pg'
 require 'active_record'

@@ -3,4 +3,4 @@
 end
 
 Deck.create(name: "Dummy deck")
-User.create(username: "spiffy", email: "spiffy@spiffy.com", password_hash: "unhashed")
+User.create(username: "spiffy", email: "spiffy@spiffy.com", password: "spiffy", password_confirmation: "spiffy")
