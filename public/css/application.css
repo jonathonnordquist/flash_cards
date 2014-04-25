@@ -1,9 +1,33 @@
 .container {
-  margin: 20px auto;
+  margin: 80px auto 20px;
   width: 600px;
   padding: 0px 20px 20px 20px;
   border: 1px dotted black;
 }
 th {
   text-align: left;
+}
+
+.top-bar {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  border: 1px solid lightgray;
+  background: lightgray;
+
+}
+
+.top-bar ul li {
+  display: inline-block;
+  padding: 0 40px;
+}
+
+.top-bar ul li:hover {
+  display: inline-block;
+  padding: 0 40px;
+  background: gray;
+}
+
+#loginout {
+  float: right;
 }
