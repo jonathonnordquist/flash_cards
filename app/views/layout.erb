@@ -22,7 +22,7 @@
   <ul>
     <li><a href="/">Cardulator</a></li>
     <% if session[:user_id] %>
-      <li id="loginout"><a href="/users/logout">Log Out</a></li>
+      <li id="loginout"><a href="/users/secure/logout">Log Out</a></li>
     <% else %>
       <li id="loginout"><a href="/users/login">Log In</a></li>
     <% end %>
