@@ -4,24 +4,28 @@
   <% else %>
     <h1>Create New Card</h1>
   <% end %>
-  <form action="/users/secure/:id/create_card" method="post">
+  <form action="/users/secure/:id/create_card" method="post" id="new_card_form">
     <div>
       Which Deck do you want to add to?
-      <select name="deck_id">
+      <select name="deck_id" id="deck_id">
         <% @decks.each do |deck| %>
           <option value="<%= deck.id %>"><%= deck.name %></option>
         <% end %>
-          <option value="new_deck">New Deck...</option>
+          <option value="new_deck" id="new_deck">New Deck...</option>
       </select>
     </div>
-    <div>
-      <input class="text-input" type="text" name="question" placeholder="Question">
-    </div>
-    <div>
-      <input class="text-input" type="text" name="answer" placeholder="Answer">
+    <div class="new_card_text">
+      <div>
+        <input class="text-input" type="text" name="question[1]" placeholder="Question">
+      </div>
+      <div>
+        <input class="text-input" type="text" name="answer[1]" placeholder="Answer">
+      </div>
     </div>
     <div>
       <input class="btn" type="submit" value="Create Card!">
+      <button class="btn" id="add_nother_card">Add Another Card</button>
     </div>
+
   </form>
 </div>
