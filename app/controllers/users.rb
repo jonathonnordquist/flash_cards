@@ -72,14 +72,50 @@ end
     # creates card
     # adds card to database
     post '/users/secure/:id/create_card' do
+      p "================================================================"
+      p params
       if !session[:page_count]
-        session[:page_count] = true  
+        session[:page_count] = true
+      end
+      if params[:deck_id] == "new_deck"
+        new_deck = Deck.new(name: params[:custom_deck_id], creator_id: session[:user_id])
+        new_deck.save
+        deck_to_add = new_deck.id
+      else
+        deck_to_add = params[:deck_id]
       end
       p session[:page_count]
-      card = Card.new(deck_id: params[:deck_id],
-               question: params[:question],
-               answer: params[:answer])
-      card.save
+      params[:answer].count.times do |y|
+        x = y + 1
+        current_question = params[:question]
+        current_answer = params[:answer]
+        card = Card.new(deck_id: deck_to_add,
+                 question: current_question[x.to_s],
+                 answer: current_answer[x.to_s])
+        card.save
+      end
 
       redirect to "/users/secure/#{session[:user_id]}/create_card"
     end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
