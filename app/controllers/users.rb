@@ -2,7 +2,6 @@ enable :sessions
 
 #security filter
 before '/users/secure/*' do
-  p "Redirecting back"
   if !session[:user_id]
     redirect '/'
   end
@@ -27,7 +26,6 @@ end
     # sets session
     post '/users/login' do
       user = User.find_by_username(params[:username])
-      p user
       if user.authenticate(params[:password])
         session[:user_id] = user.id
         redirect "/users/secure/#{user.id}/profile"
