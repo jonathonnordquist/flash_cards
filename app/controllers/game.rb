@@ -20,16 +20,20 @@ get '/game/start/:id' do
   erb :start_page
 end
 
-post '/game/question' do
-
+post '/question' do
   guesses = []
+    p "running"
   Guess.where(round_id: params[:round_id], correct: nil).each do |x|
     guesses << x
   end
-
-  @new_card = Card.find_by_id(guesses.shuffle[0].card_id)
-
-  erb :question
+  if guesses.count > 0
+    p guesses.count
+    @current_round = params[:round_id]
+    @new_card = Card.find_by_id(guesses.shuffle[0].card_id)
+    erb :question
+  else
+    # go to endgame
+  end
 end
 
 post '/results/:id' do
