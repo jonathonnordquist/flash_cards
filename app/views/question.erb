@@ -1,0 +1,9 @@
+<div class="container">
+  <h1>Deck 1</h1>
+  <p>Question #<%= @new_card.id %></p>
+  <p><%= @new_card %></p>
+  <form action="/results/<% @new_card.id %>" method="post">
+    <input type="text" name="answer" placeholder="Answer">
+    <input type="submit" name="Submit">
+  </form>
+</div>

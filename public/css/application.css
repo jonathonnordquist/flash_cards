@@ -1,9 +1,22 @@
 .container {
+  font-family: "Helvetica Neue";
   margin: 20px auto;
   width: 600px;
   padding: 0px 20px 20px 20px;
   border: 1px dotted black;
+  background-image:
+      linear-gradient(
+      to top,
+      #F0F7FF, #DDF7FF
+    );
 }
+
 th {
   text-align: left;
 }
+
+a {
+  padding-left: 10px;
+}
+
+
