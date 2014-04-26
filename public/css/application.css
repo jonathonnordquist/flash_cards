@@ -4,11 +4,13 @@
 }
 
 .container {
-  font-family: "Helvetica Neue";
+  /*font-family: "Helvetica Neue";*/
   margin: 20px auto;
+  margin-top: 100px;
   width: 600px;
   padding: 0px 20px 20px 20px;
   border: 1px dotted black;
+  border-radius: 4px;
   background-image:
       linear-gradient(
       to top,
@@ -63,12 +65,19 @@ th {
     padding: 0 40px;*/
 }
 
-
-
 #loginout {
   float: right;
   /*border-left: 1px dotted rgba(189, 195, 199,1.0);
   border-right: 1px dotted rgba(189, 195, 199,1.0);*/
+}
+
+button {
+  border-radius: 3px;
+}
+
+input {
+  margin: 4px;
+  border-radius: 3px;
 }
 
 a {

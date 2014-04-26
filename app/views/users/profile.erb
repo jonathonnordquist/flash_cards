@@ -1,4 +1,8 @@
 <div class="container">
 
-<p>Welcome <%= @user.username %></p>
+<p>Hi <%= @user.username %>! Welcome to</p>
+<h1>Web Flashcards</h1>
+<form action="/game/select" method="post">
+    <button type="submit">Start</button>
+  </form>
 </div>
