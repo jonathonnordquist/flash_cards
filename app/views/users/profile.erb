@@ -3,7 +3,12 @@
 <p>Hi <%= @user.username %>! Welcome to</p>
 <h1>Web Flashcards</h1>
 
+
 <a href="/users/secure/<%= @user.id %>/create_card">Wanna make a new deck?</a>
+<p>Total Games Played: <%= @all_rounds %></p>
+<p>Total Score: <%= @all_correct %></p>
+<p>Total Guesses: <%= @total_guesses %></p>
+<p>Average Score: <%= @total_score %>%</p>
 <form action="/game/select" method="post">
     <button class="btn" type="submit">Start</button>
   </form>

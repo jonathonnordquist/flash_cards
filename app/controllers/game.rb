@@ -31,11 +31,25 @@ post '/game/question' do
   if guesses.count > 0
     p "This is current guesses remaining #{guesses.count}"
     @current_round = params[:round_id]
+    p "-------------"
+    p @current_round
     @new_card = Card.find_by_id(guesses.shuffle[0].card_id)
     erb :question
   else
-    "go to endgame"
+    @current_round = params[:round_id]
+    redirect to "game/end_game/#{@current_round}"
   end
+end
+
+get '/game/end_game/:id' do
+  @user_id = Round.find(params[:id]).user_id
+  p @user_id
+  p "&&&&&&&&&&"
+  # @user_id = params[:@round_id]
+  @total_guess = Guess.where(round_id: params[:id]).length
+  @correct_guess = Guess.where(round_id: params[:id], correct: true).length
+  @score = @correct_guess.to_f / @total_guess.to_f * 100
+  erb :'game/end_game'
 end
 
 post '/results/:id' do
@@ -50,17 +64,8 @@ post '/results/:id' do
   current_guess = Guess.where(card_id: params[:id], round_id: params[:round_id])
   current_guess.first.update_attributes(correct: @result)
   erb :result
-  # redirect to "/game/result/#{@card_obj.id}"
 end
 
-# get '/game/result/:id' do
-#   @card_obj = Card.find(params[:id])
-#   @current_guess = Guess.find(params[:id])
-#   if @current_guess.correct == true
-#     @reply = "Guess is correct!"
-#   else
-#     @reply = "Sorry, wrong answer."
-#   end
-#   erb :result
-# end
+
+
 

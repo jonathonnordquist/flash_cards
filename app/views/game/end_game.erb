@@ -1,0 +1,12 @@
+<div class="container">
+  <h1>Game Over</h1>
+  <p>You've reached the end.</p>
+  <p>You've answered <%= @correct_guess %> out of <%= @total_guess %> questions!</p>
+  <p>Your score is: <%= @score %>%</p>
+  <form action="/game/select" method="post">
+    <button type="submit">New Game</button>
+  </form>
+  <form action="/users/secure/<%= @user_id %>/profile" method="get">
+    <button type="submit">Profile</button>
+  </form>
+</div>
