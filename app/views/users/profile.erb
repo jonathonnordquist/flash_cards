@@ -2,6 +2,10 @@
 
 <p>Hi <%= @user.username %>! Welcome to</p>
 <h1>Web Flashcards</h1>
+<p>Total Games Played: <%= @all_rounds %></p>
+<p>Total Score: <%= @all_correct %></p>
+<p>Total Guesses: <%= @total_guesses %></p>
+<p>Average Score: <%= @total_score %>%</p>
 <form action="/game/select" method="post">
     <button type="submit">Start</button>
   </form>

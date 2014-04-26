@@ -42,7 +42,10 @@ post '/game/question' do
 end
 
 get '/game/end_game/:id' do
-  @new_stats = params[:id]
+  @user_id = Round.find(params[:id]).user_id
+  p @user_id
+  p "&&&&&&&&&&"
+  # @user_id = params[:@round_id]
   @total_guess = Guess.where(round_id: params[:id]).length
   @correct_guess = Guess.where(round_id: params[:id], correct: true).length
   @score = @correct_guess.to_f / @total_guess.to_f * 100
