@@ -1,0 +1,27 @@
+<div class="container">
+  <% if session[:page_count] %>
+    <h1>Create Another Card</h1>
+  <% else %>
+    <h1>Create New Card</h1>
+  <% end %>
+  <form action="/users/secure/:id/create_card" method="post">
+    <div>
+      Which Deck do you want to add to?
+      <select name="deck_id">
+        <% @decks.each do |deck| %>
+          <option value="<%= deck.id %>"><%= deck.name %></option>
+        <% end %>
+          <option value="new_deck">New Deck...</option>
+      </select>
+    </div>
+    <div>
+      <input class="text-input" type="text" name="question" placeholder="Question">
+    </div>
+    <div>
+      <input class="text-input" type="text" name="answer" placeholder="Answer">
+    </div>
+    <div>
+      <input class="btn" type="submit" value="Create Card!">
+    </div>
+  </form>
+</div>

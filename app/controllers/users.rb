@@ -61,3 +61,27 @@ end
 
       redirect to :'/users/login'
     end
+
+
+##CARD CREATION##
+
+    # directs to card creation page
+    get '/users/secure/:id/create_card' do
+      @decks = Deck.all
+      erb :'/users/create_card'
+    end
+
+    # creates card
+    # adds card to database
+    post '/users/secure/:id/create_card' do
+      if !session[:page_count]
+        session[:page_count] = true  
+      end
+      p session[:page_count]
+      card = Card.new(deck_id: params[:deck_id],
+               question: params[:question],
+               answer: params[:answer])
+      card.save
+
+      redirect to "/users/secure/#{session[:user_id]}/create_card"
+    end
