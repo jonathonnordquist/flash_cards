@@ -26,9 +26,13 @@ end
     # sets session
     post '/users/login' do
       user = User.find_by_username(params[:username])
-      if user.authenticate(params[:password])
-        session[:user_id] = user.id
-        redirect "/users/secure/#{user.id}/profile"
+      unless !user
+        if user.authenticate(params[:password])
+          session[:user_id] = user.id
+          redirect "/users/secure/#{user.id}/profile"
+        else
+          redirect '/'
+        end
       else
         redirect '/'
       end

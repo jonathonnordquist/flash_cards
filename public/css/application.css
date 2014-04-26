@@ -4,7 +4,6 @@
 }
 
 .container {
-  /*font-family: "Helvetica Neue";*/
   margin: 20px auto;
   margin-top: 100px;
   width: 600px;
@@ -16,6 +15,10 @@
       to top,
       #F0F7FF, #DDF7FF
     );
+}
+
+li {
+  list-style-type: none;
 }
 
 th {

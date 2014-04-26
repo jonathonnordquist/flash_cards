@@ -3,9 +3,9 @@
   <p>Question #1</p>
   <p><%= @card_obj.question %></p><br>
   <% if @result %>
-      <p>You good!</p>
+      <p>Guess is correct!</p>
     <% else %>
-      <p>You suck</p>
+      <p>Sorry, wrong answer.</p>
     <% end %>
   <p>It's <%= @card_obj.answer %></p>
   <form action="/game/question" method="post">
