@@ -8,7 +8,7 @@ gem 'sinatra'
 gem 'sinatra-contrib'
 
 # Use bcrypt for pw security/authentication
-gem 'bcrypt'
+gem 'bcrypt-ruby', '~> 3.0.0'
 # Use Thin for our web server
 gem 'thin'
 

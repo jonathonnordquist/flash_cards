@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- 
+  <!--
     normalize.css removes cross-browser differences in defaults, e.g.,
     differences in how form elements appear between Firefox and IE
     See: http://necolas.github.com/normalize.css/
@@ -15,9 +15,39 @@
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="/js/application.js"></script>
 
+  <link href='http://fonts.googleapis.com/css?family=Monda' rel='stylesheet' type='text/css'>
+
   <title></title>
 </head>
 <body>
+<div class="top-bar">
+  <ul>
+    <li><a href="/">Cardulator</a></li>
+    <% if session[:user_id] %>
+      <li id="loginout"><a href="/users/secure/logout">Log Out</a></li>
+    <% else %>
+      <li id="loginout"><a href="/users/login">Log In</a></li>
+    <% end %>
+  </ul>
+</div>
+
   <%= yield %>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
