@@ -1,5 +1,6 @@
 enable :sessions
 
+#security filter
 before '/users/secure/*' do
   p "Redirecting back"
   if !session[:user_id]
@@ -7,50 +8,56 @@ before '/users/secure/*' do
   end
 end
 
-get '/users/login' do
-  erb :'/users/account_login'
-end
+##LOG OUT##
 
-post '/users/login' do
-  user = User.find_by_username(params[:username])
-  p user
-  if user.authenticate(params[:password])
-    session[:user_id] = user.id
-    redirect "/users/secure/#{user.id}/profile"
-  else
+  # cancels session
+  get '/users/secure/logout' do
+    session[:user_id] = nil
     redirect '/'
   end
-end
 
-post '/users/create_account' do
-  user = User.new(username: params[:username],
-           email: params[:email],
-           password: params[:password],
-           password_confirmation: params[:password_confirmation])
-  user.save
+##LOGIN##
 
-  redirect to :'/users/login'
-end
+    # directs to login page
+    get '/users/login' do
+      erb :'/users/account_login'
+    end
 
-get '/users/create_account' do
-  erb :'/users/create_account'
-end
+    # authenticates user login
+    # sets session
+    post '/users/login' do
+      user = User.find_by_username(params[:username])
+      p user
+      if user.authenticate(params[:password])
+        session[:user_id] = user.id
+        redirect "/users/secure/#{user.id}/profile"
+      else
+        redirect '/'
+      end
+    end
 
-# before '/users/secure/*' do
-#   p "Redirecting back"
-#   if !session[:user_id]
-#     redirect '/'
-#   end
-# end
+    # directs logged in user to profile
+    get '/users/secure/:id/profile' do
+      @user = User.find(session[:user_id])
+      erb :'/users/profile'
+    end
 
-get '/users/secure/logout' do
-  session[:user_id] = nil
-  redirect '/'
-end
+##ACCOUNT CREATION##
 
-get '/users/secure/:id/profile' do
+    # directs to account creation page
+    get '/users/create_account' do
+      erb :'/users/create_account'
+    end
 
-  @user = User.find(session[:user_id])
-  erb :'/users/profile'
-end
+    # creates account
+    # adds account to database
+    # redirects to login
+    post '/users/create_account' do
+      user = User.new(username: params[:username],
+               email: params[:email],
+               password: params[:password],
+               password_confirmation: params[:password_confirmation])
+      user.save
 
+      redirect to :'/users/login'
+    end
