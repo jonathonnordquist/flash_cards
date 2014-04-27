@@ -10,7 +10,7 @@
   </div>
   <span id="answer_result"></span>
   <p id="question_area"><%= @new_card.question %></p>
-  <form action="/results/<%= @new_card.id %>" method="post">
+  <form action="/results/<%= @new_card.id %>" method="post" id="question_form">
     <input type="hidden" name="round_id" value="<%= @current_round %>" id="current_round">
     <input type="hidden" name="card_id" value="<%= @new_card.id %>" id="current_card">
     <input type="text" name="answer" placeholder="Answer" id="answer">
