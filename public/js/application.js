@@ -7,6 +7,7 @@ $(document).ready(function() {
     }
     if(selected != "new_deck"){
       $("#new_deck_field").remove();
+      $("#create_deck_button").attr("value", "Create Cards!")
     }
   });
 
@@ -14,7 +15,7 @@ $(document).ready(function() {
 
   $("#add_nother_card").click(function(){
     event.preventDefault();
-    $(".new_card_text").append('<div><textarea cold="50" rows="5" id="question' + cardCount + '" class="text-input" type="text" name="question[' + cardCount + ']" placeholder="Question"></textarea></div><div><input class="text-input" id=answer' + cardCount + ' type="text" name="answer[' + cardCount + ']" placeholder="Answer"></div>');
+    $(".new_card_text").append('<div class="new_card_forms"><div><textarea cold="50" rows="5" id="question' + cardCount + '" class="text-input" type="text" name="question[' + cardCount + ']" placeholder="Question"></textarea></div><div><input class="text-input" id=answer' + cardCount + ' type="text" name="answer[' + cardCount + ']" placeholder="Answer"></div></div>');
     cardCount++
   })
 

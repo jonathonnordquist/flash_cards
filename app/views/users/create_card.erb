@@ -5,8 +5,8 @@
     <h1>Create New Card</h1>
   <% end %>
   <form action="/users/secure/:id/create_card" method="post" id="new_card_form">
-    <div>
-      Which Deck do you want to add to?
+    <div id="deck_selection">
+      <span>Which Deck do you want to add to?</span>
       <select name="deck_id" id="deck_id">
         <% @decks.each do |deck| %>
           <option value="<%= deck.id %>"><%= deck.name %></option>
@@ -15,12 +15,14 @@
       </select>
     </div>
     <div class="new_card_text">
-      <div>
-        <textarea cold="50" rows="5" id="question1" class="text-input" type="text" name="question[1]" placeholder="Question"></textarea>
+      <div class="new_card_forms">
+        <div>
+          <textarea cold="50" rows="5" id="question1" class="text-input" type="text" name="question[1]" placeholder="Question"></textarea>
 
-      </div>
-      <div>
-        <input id="answer1" class="text-input" type="text" name="answer[1]" placeholder="Answer">
+        </div>
+        <div>
+          <input id="answer1" class="text-input" type="text" name="answer[1]" placeholder="Answer">
+        </div>
       </div>
     </div>
     <div>
