@@ -1,7 +1,6 @@
 <div class="container">
   <h1>Deck 1</h1>
   <p>Question #1</p>
-  <p><%= @card_obj.question %></p><br>
   <% if @result %>
       <p>Guess is correct!</p>
     <% else %>
@@ -10,6 +9,6 @@
   <p>It's <%= @card_obj.answer %></p>
   <form action="/game/question" method="post">
     <input type="hidden" name="round_id" value="<%= @current_round %>">
-    <input type="submit" value="Next">
+    <input type="submit" value="Next" class="btn">
   </form>
 </div>
