@@ -16,22 +16,24 @@ get '/game/start/:id' do
   new_deck.each do |card|
     Guess.create(round_id: round.id, card_id: card.id)
   end
-  @current_round = round.id
-  erb :'game/start_page'
+  session[:current_round] = round.id
+  # erb :'game/start_page'
+  @new_card = get_cards
+  erb :'game/question'
 end
 
+
 post '/game/question' do
-  guesses = []
-  Guess.where(round_id: params[:round_id], correct: nil).each do |x|
-    guesses << x
-  end
+  # guesses = []
+  guesses = Guess.where(round_id: session[:current_round], correct: nil)
   if guesses.count > 0
     @current_round = params[:round_id]
-    @new_card = Card.find_by_id(guesses.shuffle[0].card_id)
+    # @new_card = Card.find_by_id(guesses.shuffle[0].card_id)
+    @new_card = get_cards
     erb :'game/question'
   else
     @current_round = params[:round_id]
-    redirect to "game/end_game/#{@current_round}"
+    redirect to "game/end_game/#{session[:current_round]}"
   end
 end
 
@@ -54,7 +56,7 @@ post '/results/:id' do
   else
     @result = false
   end
-  current_guess = Guess.where(card_id: params[:id], round_id: params[:round_id])
+  current_guess = Guess.where(card_id: params[:id], round_id: session[:current_round])
   current_guess.first.update_attributes(correct: @result)
   erb :"game/result"
 end
