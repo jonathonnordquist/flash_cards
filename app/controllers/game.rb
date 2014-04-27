@@ -19,22 +19,51 @@ get '/game/start/:id' do
   session[:current_round] = round.id
   # erb :'game/start_page'
   @new_card = get_cards
+  @current_round = round.id
   erb :'game/question'
 end
 
 
+# post '/game/question' do
+#   # guesses = []
+#   guesses = Guess.where(round_id: session[:current_round], correct: nil)
+#   if guesses.count > 0
+#     @current_round = params[:round_id]
+#     # @new_card = Card.find_by_id(guesses.shuffle[0].card_id)
+#     @new_card = get_cards
+#     erb :'game/question'
+#   else
+#     @current_round = params[:round_id]
+#     redirect to "game/end_game/#{session[:current_round]}"
+#   end
+# end
+
 post '/game/question' do
+  p params
   # guesses = []
   guesses = Guess.where(round_id: session[:current_round], correct: nil)
+  @card_obj = Card.find(params[:id])
+  @current_round = params[:round_id]
+  if params[:answer].downcase == @card_obj.answer.downcase
+    @result = "That answer is correct!"
+  else
+    @result = "That answer is incorrect."
+  end
+  p @result
   if guesses.count > 0
     @current_round = params[:round_id]
-    # @new_card = Card.find_by_id(guesses.shuffle[0].card_id)
-    @new_card = get_cards
-    erb :'game/question'
+    new_card = Card.find_by_id(guesses.shuffle[0].card_id)
+    new_card = get_cards
   else
     @current_round = params[:round_id]
-    redirect to "game/end_game/#{session[:current_round]}"
   end
+  result = {}
+  result[:new_card_text] = new_card.question
+  result[:new_card_id] = new_card.id
+  result[:correct] = @result
+  result[:current_round] = @current_round
+  return result.to_json
+
 end
 
 get '/game/end_game/:id' do
@@ -46,20 +75,18 @@ get '/game/end_game/:id' do
   erb :'game/end_game'
 end
 
-post '/results/:id' do
-  @card_obj = Card.find(params[:id])
-  @current_round = params[:round_id]
-  p params[:answer]
-  p "==================================================="
-  if params[:answer].downcase == @card_obj.answer.downcase
-    @result = true
-  else
-    @result = false
-  end
-  current_guess = Guess.where(card_id: params[:id], round_id: session[:current_round])
-  current_guess.first.update_attributes(correct: @result)
-  erb :"game/result"
-end
+# post '/results/:id' do
+#   @card_obj = Card.find(params[:id])
+#   @current_round = params[:round_id]
+#   if params[:answer].downcase == @card_obj.answer.downcase
+#     @result = true
+#   else
+#     @result = false
+#   end
+#   current_guess = Guess.where(card_id: params[:id], round_id: session[:current_round])
+#   current_guess.first.update_attributes(correct: @result)
+#   erb :"game/result"
+# end
 
 
 
