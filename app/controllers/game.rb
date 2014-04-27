@@ -40,30 +40,32 @@ end
 
 post '/game/question' do
   p params
-  # guesses = []
   guesses = Guess.where(round_id: session[:current_round], correct: nil)
-  @card_obj = Card.find(params[:id])
-  @current_round = params[:round_id]
-  if params[:answer].downcase == @card_obj.answer.downcase
-    @result = "That answer is correct!"
+  p guesses.count
+  card_obj = Card.find(params[:card_id])
+  current_round = params[:round_id]
+  if params[:answer].downcase == card_obj.answer.downcase
+    result_text = "That answer is correct!"
+    correct = true
   else
-    @result = "That answer is incorrect."
+    result_text = "That answer is incorrect."
+    correct = false
   end
-  p @result
-  if guesses.count > 0
-    @current_round = params[:round_id]
-    new_card = Card.find_by_id(guesses.shuffle[0].card_id)
-    new_card = get_cards
-  else
-    @current_round = params[:round_id]
-  end
+  current_guess = Guess.where(card_id: params[:card_id], round_id: session[:current_round])
+  current_guess.first.update_attributes(correct: correct)
   result = {}
+  result[:current_round] = current_round
+  result[:result_text] = result_text
+  if guesses.count > 0
+    new_card = Card.find_by_id(guesses.shuffle[0].card_id)
+  else
+    result[:exit_game] = true
+    p "this is result #{result}"
+    return result.to_json
+  end
   result[:new_card_text] = new_card.question
   result[:new_card_id] = new_card.id
-  result[:correct] = @result
-  result[:current_round] = @current_round
   return result.to_json
-
 end
 
 get '/game/end_game/:id' do

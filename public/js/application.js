@@ -41,23 +41,24 @@ $(document).ready(function() {
     $.post("/game/question",
       {answer: $("#answer").val(),
        round_id: $("#current_round").val(),
-       id: $("#current_card").val()
+       card_id: $("#current_card").val()
       },
       function(data){
         var dejsonified = $.parseJSON(data);
-        $("#answer_area").text(dejsonified.correct);
+        $("#answer_area").text(dejsonified.result_text);
+        if(dejsonified.exit_game === true){
+          $("#question_form").append('<form action="../../game/end_game/' + dejsonified.current_round + '"><input type="submit" value="Go to results" class="btn"></form>')
+        }
+        else{
+        $("#answer").val("")
         $("#question_area").text(dejsonified.new_card_text);
+        $("#current_card").attr("value", dejsonified.new_card_id)
+
+        }
       }
     )
-
   })
-
-
-
 });
-
-
-
 
 
 
