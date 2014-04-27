@@ -104,8 +104,8 @@ a {
 .new_card_forms {
   padding-top: 20px;
   width: 95%;
-  border-top: 1px dashed black;
-  border-bottom: 1px dashed black;
+  border-top: 1px dashed lightgray;
+  border-bottom: 1px dashed lightgray;
 }
 
 

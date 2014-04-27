@@ -15,7 +15,7 @@ $(document).ready(function() {
 
   $("#add_nother_card").click(function(){
     event.preventDefault();
-    $(".new_card_text").append('<div class="new_card_forms"><div><textarea cold="50" rows="5" id="question' + cardCount + '" class="text-input" type="text" name="question[' + cardCount + ']" placeholder="Question"></textarea></div><div><input class="text-input" id=answer' + cardCount + ' type="text" name="answer[' + cardCount + ']" placeholder="Answer"></div></div>');
+    $(".new_card_text").append('<div class="new_card_forms"><div><textarea cols="50" rows="5" id="question' + cardCount + '" class="text-input" type="text" name="question[' + cardCount + ']" placeholder="Question"></textarea></div><div><input class="text-input" id=answer' + cardCount + ' type="text" name="answer[' + cardCount + ']" placeholder="Answer"></div></div>');
     cardCount++
   })
 
@@ -35,6 +35,25 @@ $(document).ready(function() {
       };
     };
   })
+
+  $("#answer_button").click(function(){
+    event.preventDefault();
+    $.post("/game/question",
+      {answer: $("#answer").val(),
+       round_id: $("#current_round").val(),
+       id: $("#current_card").val()
+      },
+      function(data){
+        var dejsonified = $.parseJSON(data);
+        $("#answer_area").text(dejsonified.correct);
+        $("#question_area").text(dejsonified.new_card_text);
+      }
+    )
+
+  })
+
+
+
 });
 
 

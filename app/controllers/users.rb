@@ -113,8 +113,8 @@ end
         current_question = params[:question]
         current_answer = params[:answer]
         card = Card.new(deck_id: deck_to_add,
-                 question: current_question[x.to_s],
-                 answer: current_answer[x.to_s])
+                 question: current_question[x],
+                 answer: current_answer[x])
         card.save
       end
       redirect to "/users/secure/#{session[:user_id]}/profile"
