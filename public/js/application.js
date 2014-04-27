@@ -47,6 +47,7 @@ $(document).ready(function() {
         var dejsonified = $.parseJSON(data);
         $("#answer_area").text(dejsonified.result_text);
         if(dejsonified.exit_game === true){
+          $("#answer_button").attr("disabled", true)
           $("#question_form").append('<form action="../../game/end_game/' + dejsonified.current_round + '"><input type="submit" value="Go to results" class="btn"></form>')
         }
         else{
