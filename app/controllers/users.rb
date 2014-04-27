@@ -117,8 +117,7 @@ end
                  answer: current_answer[x.to_s])
         card.save
       end
-
-      redirect to "/users/secure/#{session[:user_id]}/create_card"
+      redirect to "/users/secure/#{session[:user_id]}/profile"
     end
 
 
