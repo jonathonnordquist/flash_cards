@@ -2,7 +2,7 @@ Flash Cards
 ===========
 
 
-A CRUD flash card application.  User's can create flash card quizes, take quizes that others have created and track their progress.
+A CRUD flash card application.  User's can create flash card quizes, take quizes that others have created and track their progress.  Created as a Dev Bootcamp early phase two group project.
 
 Technologies
 ------------
